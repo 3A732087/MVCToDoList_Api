@@ -9,5 +9,10 @@ namespace MVCToDoList_Api.Controllers
 {
     public class ToDoListApiController : ApiController
     {
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            return "TEST";
+        }
     }
 }
