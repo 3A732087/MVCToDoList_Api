@@ -84,15 +84,16 @@ namespace MVCToDoList_Api.Services
         #endregion
 
         #region 新增待辦事項
-        public void InsertToDoList(ToDoList newData)
+        public int InsertToDoList(ToDoList newData)
         {
-            string sql = $@"insert into ToDoList (Title, Level, Dealline) value ('{newData.Title}','{newData.Level}','{DateTime.Now.ToString("yyyy/MM/dd")}')";
+            string sql = $@"insert into ToDoList (Title, Level, Deadline) values ('{newData.Title}','{newData.Level}','{DateTime.Now.ToString("yyyy/MM/dd")}')";
+            int res = 0;
 
             try
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
+                res = cmd.ExecuteNonQuery();
 
             }
             catch(Exception e)
@@ -103,20 +104,20 @@ namespace MVCToDoList_Api.Services
             {
                 conn.Close();
             }
-
+            return res;
         }
         #endregion
 
         #region 刪除待辦事項
-        public void UpdateToDoList(int Id)
+        public int DeleteToDoList(int Id)
         {
             string sql = $@"delete from ToDoList where 1=1 and Id = {Id}";
-
+            int res = 0;
             try
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
+                res = cmd.ExecuteNonQuery();
 
             }
             catch (Exception e)
@@ -127,6 +128,7 @@ namespace MVCToDoList_Api.Services
             {
                 conn.Close();
             }
+            return res;
         }
         #endregion
     }
