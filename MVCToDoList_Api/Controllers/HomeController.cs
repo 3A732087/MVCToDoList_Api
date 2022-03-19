@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MVCToDoList_Api.Models;
+using MVCToDoList_Api.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,14 @@ namespace MVCToDoList_Api.Controllers
             return View();
         }
 
+        public ActionResult ToDoList()
+        {
+            ToDoListService _service = new ToDoListService();
+            List<ToDoList> DataList = new List<ToDoList>();
+            DataList = _service.GetAllToDoList();
+            return View(DataList);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,10 +30,13 @@ namespace MVCToDoList_Api.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Create()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult Delete()
+        {
             return View();
         }
     }
